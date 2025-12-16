@@ -1,0 +1,23 @@
+[BRIDGE] Listening on port 8000
+[BRIDGE] Target: http://localhost:11434
+[BRIDGE] Mode: ollama
+[BRIDGE] Request: POST /v1beta/models/gemini-2.5-flash-lite:generateContent
+[BRIDGE] Handling as Ollama request
+[BRIDGE] Messages: 2
+[BRIDGE] Last Prompt: "prompt Why is the sky blue?..."
+[BRIDGE] Ollama Response Status: 200
+[BRIDGE] Request: POST /v1beta/models/gemini-2.5-flash-lite:generateContent
+[BRIDGE] Handling as Ollama request
+[BRIDGE] Messages: 2
+[BRIDGE] Last Prompt: "prompt Why is the sky blue?..."
+[BRIDGE] Ollama Response Status: 200
+[BRIDGE] Request: POST /v1beta/models/gemini-2.5-flash-lite:generateContent
+[BRIDGE] Handling as Ollama request
+[BRIDGE] Messages: 2
+[BRIDGE] Last Prompt: "prompt Why is the sky blue?..."
+[BRIDGE] Ollama Response Status: 200
+[BRIDGE] Request: POST /v1beta/models/gemini-2.5-flash-lite:generateContent
+[BRIDGE] Handling as Ollama request
+[BRIDGE] Messages: 2
+[BRIDGE] Last Prompt: "prompt Why is the sky blue?..."
+[BRIDGE] Ollama Response Status: 200

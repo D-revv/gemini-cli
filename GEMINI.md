@@ -417,6 +417,27 @@ node scripts/bridge.js
 
 The bridge will listen on port 8000.
 
+### Running with Docker (Ollama)
+
+You can run a local Ollama instance using Docker and configure the bridge to use it.
+
+1. Start the Ollama container:
+   ```bash
+   docker run -d -p 11434:11434 --name ollama ollama/ollama
+   ```
+
+2. Pull a model (e.g., tinyllama):
+   ```bash
+   docker exec ollama ollama pull tinyllama
+   ```
+
+3. Start the bridge pointing to Ollama:
+   ```bash
+   export BRIDGE_TARGET="http://localhost:11434"
+   export BRIDGE_MODE="ollama"
+   node scripts/bridge.js
+   ```
+
 ### Configuring Gemini CLI
 
 To tell Gemini CLI to route traffic through the bridge, set the `GEMINI_API_BASE_URL` environment variable:
@@ -427,15 +448,12 @@ export GEMINI_API_BASE_URL="http://localhost:8000"
 
 ### Example Usage
 
-1. Start the bridge in one terminal:
-   ```bash
-   node scripts/bridge.js
-   ```
+1. Start the bridge (as configured above) in one terminal.
 
 2. In another terminal, configure the environment and run a command:
    ```bash
    export GEMINI_API_BASE_URL="http://localhost:8000"
-   export GEMINI_API_KEY="your_api_key" # Required for the bridge to forward successfully
+   export GEMINI_API_KEY="dummy_key" # Required by CLI, but ignored by local Ollama
    node bundle/gemini.js prompt "Hello, world!"
    ```
 
