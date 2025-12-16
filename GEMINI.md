@@ -398,3 +398,45 @@ comments.
 - Use hyphens instead of underscores in flag names (e.g. `my-flag` instead of
   `my_flag`).
 - Always refer to Gemini CLI as `Gemini CLI`, never `the Gemini CLI`.
+
+## Development Bridge
+
+For development and debugging, you can use the included bridge server. This intercepts requests from `gemini-cli`, logs them to the console, and forwards them to the Google Gemini API (or other configured targets).
+
+### Prerequisites
+
+- Node.js (v20 or later)
+
+### Starting the Bridge
+
+Run the bridge script from the root of the repository:
+
+```bash
+node scripts/bridge.js
+```
+
+The bridge will listen on port 8000.
+
+### Configuring Gemini CLI
+
+To tell Gemini CLI to route traffic through the bridge, set the `GEMINI_API_BASE_URL` environment variable:
+
+```bash
+export GEMINI_API_BASE_URL="http://localhost:8000"
+```
+
+### Example Usage
+
+1. Start the bridge in one terminal:
+   ```bash
+   node scripts/bridge.js
+   ```
+
+2. In another terminal, configure the environment and run a command:
+   ```bash
+   export GEMINI_API_BASE_URL="http://localhost:8000"
+   export GEMINI_API_KEY="your_api_key" # Required for the bridge to forward successfully
+   node bundle/gemini.js prompt "Hello, world!"
+   ```
+
+You should see request and response logs in the bridge terminal, and the standard CLI output in the other terminal.
