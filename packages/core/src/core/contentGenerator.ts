@@ -59,6 +59,7 @@ export type ContentGeneratorConfig = {
   vertexai?: boolean;
   authType?: AuthType;
   proxy?: string;
+  baseUrl?: string;
 };
 
 export async function createContentGeneratorConfig(
@@ -73,10 +74,12 @@ export async function createContentGeneratorConfig(
     process.env['GOOGLE_CLOUD_PROJECT_ID'] ||
     undefined;
   const googleCloudLocation = process.env['GOOGLE_CLOUD_LOCATION'] || undefined;
+  const baseUrl = process.env['GEMINI_API_BASE_URL'] || undefined;
 
   const contentGeneratorConfig: ContentGeneratorConfig = {
     authType,
     proxy: config?.getProxy(),
+    baseUrl,
   };
 
   // If we are using Google auth or we are in Cloud Shell, there is nothing else to validate for now
@@ -171,7 +174,10 @@ export async function createContentGenerator(
           'x-gemini-api-privileged-user-id': `${installationId}`,
         };
       }
-      const httpOptions = { headers };
+      const httpOptions: any = { headers };
+      if (config.baseUrl) {
+        httpOptions.baseUrl = config.baseUrl;
+      }
 
       const googleGenAI = new GoogleGenAI({
         apiKey: config.apiKey === '' ? undefined : config.apiKey,
